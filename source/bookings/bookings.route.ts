@@ -14,6 +14,7 @@ export class BookingsRoute {
   private initializeRoutes() {
     this.router.get('/', this.controller.healthCheck);
     this.router.post('/api/v1/booking/', this.controller.createBooking.bind(this.controller));
+    this.router.patch('/api/v1/booking/:id', this.controller.extendBooking.bind(this.controller));
   }
 
   public getRouter(): Router {

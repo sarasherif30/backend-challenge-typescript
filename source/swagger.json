@@ -14,6 +14,34 @@
         "responses": { "200": { "description": "OK", "content": { "*/*": { "schema": { "type": "object" } } } } }
       }
     },
+    "/api/v1/booking/{id}": {
+      "patch": {
+        "tags": ["booking-controller"],
+        "operationId": "extendBooking",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ExtendBookingInput" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": { "*/*": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "tags": ["booking-controller"],
@@ -37,6 +65,13 @@
           "checkInDate": { "type": "string", "format": "date" },
           "numberOfNights": { "type": "integer", "format": "int32" }
         }
+      },
+      "ExtendBookingInput": {
+        "type": "object",
+        "properties": {
+          "numberOfNights": { "type": "integer", "format": "int32" }
+        },
+        "required": ["numberOfNights"]
       },
       "HealthResponse": { "type": "object", "properties": { "message": { "type": "string" } } }
     }

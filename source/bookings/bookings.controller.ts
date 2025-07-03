@@ -19,9 +19,21 @@ export class BookingsController {
     try {
       const bookingData: Booking = req.body;
       const newBooking = await this.bookingsService.createBooking(bookingData);
-      res.status(200).json(newBooking);
+      res.status(201).json(newBooking);
     } catch (error: any) {
       res.status(400).json(error.message);
+    }
+  }
+
+  async extendBooking(req: Request, res: Response): Promise<void> {
+    const bookingId = Number(req.params.id);
+    const { numberOfNights }: { numberOfNights: number } = req.body;
+
+    try {
+      const updatedBooking = await this.bookingsService.extendBooking(bookingId, numberOfNights);
+      res.status(200).json(updatedBooking);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
     }
   }
 }
